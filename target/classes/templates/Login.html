@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .error{
+            font-style: italic;
+            color: rgba(255, 0, 0, 0.58)
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form th:action="@{/hutu/controlUser}" th:object="${user}" method="post">
+                <div class="form-group">
+                    <label for="Mail">Mail:
+                        <span th:if="${#fields.hasErrors('mail')}"
+                              th:errors="*{mail}"
+                              class="error"  >
+                        </span>
+                    </label>
+                    <input th:field="*{mail}" type="text" class="form-control bg-info text-white" id="Mail" placeholder="Mail">
+                </div>
+                <div class="form-group">
+                    <label for="Şifre">Şifre:
+                        <span th:if="${#fields.hasErrors('password')}"
+                              th:errors="*{password}"
+                              class="error">
+                        </span>
+                    </label>
+                    <input th:field="*{password}" type="password" class="form-control bg-info text-white" id="Şifre" placeholder="Şifre">
+                </div>
+                <button type="submit">Giriş Yap</button>
+            </form>
+            <form th:action="@{/hutu/register}"><button type="submit">Kayıt Ol</button></form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

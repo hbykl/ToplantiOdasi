@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="container">
+    <!-- infoCookie değeri null değilse uyarı mesajını göster -->
+    <div th:if="${infoCookie!='null'}" class="alert alert-info mt-3 text-center">
+        <h2 th:text="${infoCookie}"></h2>
+    </div>
+</div>
+<div class="container">
+    <form th:action="@{/hutu/user/newRoom}" ><button type="submit" class="btn btn-primary">Yeni Oda Ekle</button></form>
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+        <tr>
+            <th>Oda İsmi</th>
+            <th>Oda Durumu</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempRoom:${room}">
+            <td><p th:text="${tempRoom.getRoomName()}"></p><p style="font-style: italic ; color: rgba(0,0,0,0.65) ; font-size: 11px" th:text="'~'+${tempRoom.getUser().getName()}+' tarafından oluşturuldu'"></p>
+            </td>
+            <td class="font-weight-bold">
+                <span th:if="${tempRoom.isSituation()}">
+                    <span id="boot-icon" class="bi bi-check" style="font-size: 2rem; color: rgb(0, 128, 55);"></span>
+                </span>
+                <span th:if="!${tempRoom.isSituation()}">
+                <span id="boot-icon2" class="bi bi-x" style="font-size: 2rem; color: rgb(255, 0, 0);"></span>
+                </span>
+            </td>
+            <td><form th:action="@{'/hutu/user/update/'+${tempRoom.getId()}}" method="get"><button type="submit" class="btn btn-success">Güncelle</button></form></td>
+            <td><form th:action="@{'/hutu/user/delete/'+${tempRoom.getId()}}" method="get"><button type="submit" class="btn btn-danger">Sil</button></form></td>
+            <td ></td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/hutu/user/logout}"><button class="btn btn-warning">çıkış yap</button></form>
+</div>
+
+</body>
+</html>

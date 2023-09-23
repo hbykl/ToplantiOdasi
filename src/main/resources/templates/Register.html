@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .error{
+            font-style: italic;
+            color: rgba(255, 0, 0, 0.58)
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form th:action="@{/hutu/saveUser}" th:object="${kayit}" method="post">
+                <div class="form-group">
+                    <label for="Name">İsminizi giriniz:
+                        <span th:if="${#fields.hasErrors('name')}"
+                              th:errors="*{name}"
+                              class="error">
+                        </span>
+
+                    </label>
+                    <input th:field="*{name}" type="text" class="form-control" id="Name" placeholder="Ad">
+                </div>
+                <div class="form-group">
+                    <label for="LastName">Soyadınızı giriniz:
+                        <span th:if="${#fields.hasErrors('lastName')}"
+                              th:errors="*{lastName}"
+                              class="error">
+                        </span>
+                    </label>
+                    <input th:field="*{lastName}" type="text" class="form-control" id="LastName" placeholder="Soyad">
+                </div>
+                <div class="form-group">
+                    <label for="Mail">Mail:
+                        <span th:if="${#fields.hasErrors('mail')}"
+                              th:errors="*{mail}"
+                              class="error">
+                        </span>
+                    </label>
+                    <input th:field="*{mail}" type="text" class="form-control" id="Mail" placeholder="Mail">
+                </div>
+                <div class="form-group">
+                    <label for="Password">Şifre:
+                        <span th:if="${#fields.hasErrors('password')}"
+                              th:errors="*{password}"
+                              class="error">
+                        </span>
+                    </label>
+                    <input th:field="*{password}" type="password" class="form-control" id="Password" placeholder="Şifre">
+                </div>
+                <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
